@@ -18,6 +18,7 @@ def main():
         # 1. Exibir o menu
         print("1. Euros -> Dólares")
         print("2. Dólares -> Euros")
+        print("3. Euros -> Libras Esterlinas")
         print("E. Encerrar o programa")
 
         # 2. Ler opção
@@ -30,6 +31,8 @@ def main():
         elif opcao == '2':
             montante = dec(input("Montante em Dólares: "))
             print(f"Euros -> {montante / cambio_eur_usd:.2f}")
+        elif opcao == '3':
+            print(f"Opção ainda não implementada")
         elif opcao.upper() == 'T':
             print("Programa vai terminar")
             break
