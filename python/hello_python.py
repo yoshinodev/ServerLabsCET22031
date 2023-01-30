@@ -5,6 +5,7 @@ def greeting(name: str):
 
 print("Olá!")
 greeting(sys.argv[1])
+print("Adeus!")
 
 # greeting(input("Como se chama? "))
 
