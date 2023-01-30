@@ -18,7 +18,7 @@ def main():
         # 1. Exibir o menu
         print("1. Euros -> Dólares")
         print("2. Dólares -> Euros")
-        print("T. Terminar o programa")
+        print("E. Encerrar o programa")
 
         # 2. Ler opção
         opcao = input("> ")
