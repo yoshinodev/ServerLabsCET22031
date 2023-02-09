@@ -251,7 +251,7 @@ def exec_terminar():
     sys.exit(0)
 #:
 
-def main() -> None:
+def main():
     global produtos
     produtos = le_produtos('produtos.csv')
     exec_menu()
