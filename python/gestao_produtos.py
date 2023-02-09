@@ -125,6 +125,29 @@ class CatalogoProdutos:
         return encontrados
     #:
 
+    def remove_por_id(self, id: int) -> Produto | None:
+        prod = self._prods.get(id)
+        if prod:
+            del self._prods[id]
+        return prod
+    #:
+
+    # def remove(self, criterio) -> 'CatalogoProdutos':
+    #     removidos = CatalogoProdutos()
+    #     for prod in self._prods.values():    # não funciona: não podemos 
+    #         if criterio(prod):               # apagar num dicionário que
+    #             del self._prods[prod.id]     # que está a ser iterado
+    #             removidos.append(prod)
+    #     return removidos
+    # #:
+
+    def remove(self, criterio) -> 'CatalogoProdutos':
+        a_remover = self.pesquisa(criterio)
+        for prod in a_remover:
+            del self._prods[prod.id]
+        return a_remover
+    #:
+
     def __str__(self):
         class_name = self.__class__.__name__
         return f'{class_name}[#produtos = {len(self._prods)}]'
@@ -223,6 +246,7 @@ def exec_menu():
         if opcao in ('L', 'LISTAR'):
             exec_listar()
         elif opcao in ('T', 'TERMINAR'):
+            break
             exec_terminar()
         else:
             exibe_msg(f"Opção {opcao} inválida!")
