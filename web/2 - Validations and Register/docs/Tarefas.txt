@@ -1,4 +1,4 @@
-1- Adicionar opção '-r/--reload' a app.py
+1 - Adicionar opção '-r/--reload' a app.py
 
 2 - Implementar modelo de dados que suporte múltiplas inscrições em torneios
    (ou seja, relacionamento de muitos-para-muitos entre Player e Tournament)
