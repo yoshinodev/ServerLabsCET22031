@@ -7,3 +7,5 @@
     Ver ficheiro locale.js. Neste ficheiro está um esboço para um suporte 
     de várias linguas client-side. Acabar este suporte e acrescentar 
     dois botões para alternar entre as duas linguas.
+
+(Opcional: 4 - Implementar formulário para criar torneio.)
