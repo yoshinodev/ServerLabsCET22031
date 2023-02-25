@@ -30,6 +30,12 @@ from pydantic import BaseModel, Field
 class PlayerBase(BaseModel):
     full_name: str
     email: str
+
+    class Config:
+        # https://docs.pydantic.dev/usage/model_config/
+        # https://docs.pydantic.dev/usage/models/#orm-mode-aka-arbitrary-class-instances
+        orm_mode = True
+    #:
 #:
 
 # NOTE: Notice that SQLAlchemy models define attributes using '=', and
