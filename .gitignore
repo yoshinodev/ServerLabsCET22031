@@ -156,3 +156,4 @@ dmypy.json
 
 # SQLite
 web/**/*.db
+cmd.txt
