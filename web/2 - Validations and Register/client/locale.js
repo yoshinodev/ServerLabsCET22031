@@ -89,9 +89,11 @@ class UnknownLanguage extends Error {}
 let currentLanguage = 'en_US';
 
 function setCurrentLanguage(newCurrentLanguage) {
+
 }
 
 function tr(messageID) {
+
 }
 
 const trDoc = (function() {

@@ -101,9 +101,10 @@ Usage:
 
 Options:
   -p PORT, --port=PORT          Listen on this port [default: 8000]
-  -c, --create-ddl              Crea    te datamodel in the database
+  -c, --create-ddl              Create datamodel in the database
   -d, --populate-db             Populate the DB with dummy for testing purposes
   -h HOST_IP, --host=HOST_IP    Listen on this IP address [default: 127.0.0.1]
+  -r, --reload                  Reload the server on code changes
 """
     args = docopt(help_doc)
     create_ddl = args['--create-ddl']

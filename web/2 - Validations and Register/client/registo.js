@@ -62,7 +62,10 @@ async function registerPlayer() {
         level         : bySel('[name=level]').value,
         tournament_id : TOURNAMENT_ID,
     };
+
+    //this uses the fetch written in utils.js
     const response = await byPOSTasJSON(`${URL}/register`, player);
+    // json method returns the object parsed from the JSON string to a JS object
     return [response.ok, await response.json()];
 }
 
