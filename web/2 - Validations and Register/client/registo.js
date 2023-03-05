@@ -15,7 +15,7 @@ import {
 
 
 const URL = 'http://127.0.0.1:8000';
-const TOURNAMENT_ID = 1;
+// const TOURNAMENT_ID = document.querySelector('body').dataset.tournamentId;
 
 addPredicates({
     fullName           : /^\p{Letter}{2,}( \p{Letter}{2,})+$/u,
@@ -54,13 +54,15 @@ async function validateAndSubmitForm() {
 
 async function registerPlayer() {
     const player = {
+        tournament_id : bySel('[name=tournamentId]').value,
         full_name     : bySel('[name=fullName]').value,
         email         : bySel('[name=email]').value,
         password      : bySel('[name=password]').value,
         phone_number  : bySel('[name=phoneNumber]').value,
         birth_date    : bySel('[name=birthDate]').value,
         level         : bySel('[name=level]').value,
-        tournament_id : TOURNAMENT_ID,
+        
+        // tournament_id : TOURNAMENT_ID,
     };
 
     //this uses the fetch written in utils.js

@@ -74,38 +74,39 @@ async def register(
     if not db_player:
         db_player = crud.create_player(db_session, player)
 
-    if db_player.tournament_id == tourn_id:
-        error = ErrorCode.ERR_PLAYER_ALREADY_ENROLLED
+    tournament = crud.get_tournament_by_id(db_session, tourn_id)
+
+    if tournament is None:
+        error = ErrorCode.ERR_UNKNOWN_TOURNAMENT_ID
         raise HTTPException(status_code=400, detail=error.details(tourn_id = tourn_id))
 
-    if crud.get_tournament_by_id(db_session, tourn_id) is None:
-        error = ErrorCode.ERR_UNKNOWN_TOURNAMENT_ID
-        raise HTTPException(status_code = 404, detail=error.details(tourn_id = tourn_id))
+    for tourn in db_player.tournament:
+        if tourn.id == tournament.id:
+            error = ErrorCode.ERR_PLAYER_ALREADY_ENROLLED
+            raise HTTPException(status_code = 404, detail=error.details(tourn_id = tourn_id))
 
-    crud.update_player_tournament(db_session, db_player, tourn_id)
+    crud.update_player_tournament(db_session, db_player, tournament)
 
-    return db_player
+    return db_player;
 #:
-
-################################################################################
 
 def main():
     import uvicorn
     from docopt import docopt
     help_doc = """
-A Web accessible FastAPI server that allow players to register/enroll
-for tournaments.
+    A Web accessible FastAPI server that allow players to register/enroll
+    for tournaments.
 
-Usage:
-  app.py [-c | -c -d] [-p PORT] [-h HOST_IP]
+    Usage:
+    app.py [-c | -c -d] [-p PORT] [-h HOST_IP] [-r]
 
-Options:
-  -p PORT, --port=PORT          Listen on this port [default: 8000]
-  -c, --create-ddl              Create datamodel in the database
-  -d, --populate-db             Populate the DB with dummy for testing purposes
-  -h HOST_IP, --host=HOST_IP    Listen on this IP address [default: 127.0.0.1]
-  -r, --reload                  Reload the server on code changes
-"""
+    Options:
+    -p PORT, --port=PORT          Listen on this port [default: 8000]
+    -c, --create-ddl              Create datamodel in the database
+    -d, --populate-db             Populate the DB with dummy for testing purposes
+    -h HOST_IP, --host=HOST_IP    Listen on this IP address [default: 127.0.0.1]
+    -r, --reload                  Reload the server on code changes
+    """
     args = docopt(help_doc)
     create_ddl = args['--create-ddl']
     populate_db = args['--populate-db']
@@ -114,13 +115,11 @@ Options:
         if populate_db:
             models.populate_db()
         #:
-    #:
-
     uvicorn.run(
         'app:app',
         port = int(args['--port']), 
         host = args['--host'],
-        reload = True,
+        reload = args['--reload'],
     )
 #:
 

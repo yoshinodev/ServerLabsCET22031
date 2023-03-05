@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 
 <head>
     <title>Registo</title>
@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="registo.css">
     <script type="module" src="registo.js" defer></script>
+
     <!-- <meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://127.0.0.1:8000"> -->
 </head>
 
@@ -14,8 +15,8 @@
     <main>
         <div class="left-part">
             <i class="fa fa-table-tennis fa-4x"></i>
-            <h1>Torneio da Primavera</h1>
-            <p>Prémios até ao 10&#x2070; lugar</p>
+            <h1 key="tr">{{TOURNAMENT_NAME}}</h1>
+            <p key="tr">{{TOURNAMENT_PRIZES}}</p>
             <div class="btn-group">
                 <a class="btn-item" href="#">Regulamento</a>
                 <a class="btn-item" href="#">Membros</a>
@@ -28,6 +29,15 @@
             </div>
             <div class="submission-status"></div>
             <div class="info">
+                <div class="field">
+                    <label>Seleção de Torneio</label>
+                    <select id="tournamentId" name="tournamentId" required data-validation>
+                        <option value="1" selected>Torneio da Páscoa</option>
+                        <option value="2">Torneio da Amizade</option>
+                        <option value="3">Torneio da Primavera</option>
+                    </select>
+                    <span class="status"></span>
+                </div>
                 <div class="field">
                     <label>Nome completo <span class="required">*</span></label>
                     <input  type="text" name="fullName" required autofocus
@@ -102,6 +112,7 @@
             <button type="button" id="reset" href="/">Limpar</button>
         </form>
     </main>
+    
 </body>
-
+<script src="locale.js"></script>
 </html>
