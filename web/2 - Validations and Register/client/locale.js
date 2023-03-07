@@ -1,24 +1,5 @@
-// export {
-//     tr,
-//     trDoc,
-//     setCurrentLanguage,
-//     UnknownMessageID,
-//     UnknownLanguage,
-// }
-/*
-    No código HTML, em vez de (por exemplo):
-
-        <h1>Torneio da Primavera</h1>
-        OU
-        <h1>Spring Tournament</h1>
-
-    colocamos: 
-
-        <h1>{{tr TOURNAMENT_NAME}}</h1>
- */
-
 const userMessages = {
-    en_US: {
+    "en": {
         ERR_ENROLLING: "We were unable to proceed with the enrollment.",
         ERR_UNSPECIFIED_TOURNAMENT: "We're sorry but there was a problem with the enrolling data.",
         ERR_PLAYER_ALREADY_ENROLLED: "Player already enrolled at the tournament.",
@@ -26,11 +7,17 @@ const userMessages = {
         SUCCESS_ENROLLING: "Player successfully enrolled.",
         PLAYER: "Player",
         EMAIL_ADDR: "Email address",
+        HOME_NAV: "Home",
+        CREATE_TOURNAMENT_NAV: "Create Tournaments",
         TOURNAMENT_NAME: "Spring Tournament",
         TOURNAMENT_PRIZES: "Prizes up to 10th place",
         RULES: "Regulation",
         MEMBERS: "Members",
         ENROLL_HERE: "Register for tournament here",
+        SELECT_TOURNAMENT: "Select a tournament",
+        EASTER_TOURNAMENT: "Easter Tournament",
+        FRIENDSHIP_TOURNAMENT: "Friendship Tournament",
+        SPRING_TOURNAMENT: "Spring Tournament",
         FULL_NAME_LABEL: "Full name",
         EMAIL_ADDR_LABEL: "Email",
         PHONE_NUMBER_LABEL: "Phone number",
@@ -48,8 +35,21 @@ const userMessages = {
         PRO_LEVEL: "Professional",
         SUBMIT_BTN: "Submit",
         RESET_BTN: "Reset",
+        // START OF NEW TOURNAMENTS PAGE TRANSLATIONS
+        CREATE_TOURNAMENT_TITLE: "Create a new tournament",
+        TOURNAMENT_NAME_LABEL: "Tournament name",
+        TOURNAMENT_LOCATION: "Tournament location",
+        TOURNAMENT_START_DATE: "Tournament start date",
+        TOURNAMENT_END_DATE: "Expected end date",
+        PARTICIPANTS_CAPACITY: "Participants capacity",
+        TO_BE_DEFINED_OPTION: "To be defined",
+        UNLIMITED_OPTION: "Unlimited",
+        PRIVACY_POLICY_MSG2: "I read and I agree with the",
+        PRIVACY_POLICY2: "Privacy Policy",
+        SUBMIT_BTN2: "Submit",
+        RESET_BTN2: "Reset",
     },
-    pt_PT: {
+    "pt": {
         ERR_ENROLLING: "Não foi possível concluir a inscrição.",
         ERR_UNSPECIFIED_TOURNAMENT: "Ooops...detectámos um problema com os dados de inscrição.",
         ERR_PLAYER_ALREADY_ENROLLED: "O jogador já se encontra inscrito no torneio.",
@@ -57,11 +57,17 @@ const userMessages = {
         SUCCESS_ENROLLING: "Jogador inscrito com sucesso.",
         PLAYER: "Jogador",
         EMAIL_ADDR: "Endereço de email",
+        HOME_NAV: "Início",
+        CREATE_TOURNAMENT_NAV: "Criar Torneios",
         TOURNAMENT_NAME: "Torneio da Primavera",
         TOURNAMENT_PRIZES: "Prémios até ao 10&#x2070; lugar",
         RULES: "Regulamento",
         MEMBERS: "Membros",
         ENROLL_HERE: "Inscreva-se aqui",
+        SELECT_TOURNAMENT: "Selecione um torneio",
+        EASTER_TOURNAMENT: "Torneio da Páscoa",
+        FRIENDSHIP_TOURNAMENT: "Torneio da Amizade",
+        SPRING_TOURNAMENT: "Torneio da Primavera",
         FULL_NAME_LABEL: "Nome completo",
         EMAIL_ADDR_LABEL: "Email",
         PHONE_NUMBER_LABEL: "Telefone",
@@ -79,6 +85,19 @@ const userMessages = {
         PRO_LEVEL: "Profissional",
         SUBMIT_BTN: "Submeter",
         RESET_BTN: "Limpar",
+        // START OF NEW TOURNAMENTS PAGE TRANSLATIONS
+        CREATE_TOURNAMENT_TITLE: "Crie o seu torneio",
+        TOURNAMENT_NAME_LABEL: "Nome do torneio",
+        TOURNAMENT_LOCATION: "Localização do torneio",
+        TOURNAMENT_START_DATE: "Data de início prevista",
+        TOURNAMENT_END_DATE: "Data de fim prevista",
+        PARTICIPANTS_CAPACITY: "Capacidade de participantes",
+        TO_BE_DEFINED_OPTION: "A definir",
+        UNLIMITED_OPTION: "Ilimitado",
+        PRIVACY_POLICY_MSG2: "Li e concordo com a",
+        PRIVACY_POLICY2: "Política de Privacidade",
+        SUBMIT_BTN2: "Submeter",
+        RESET_BTN2: "Limpar",
     },
 };
 
@@ -93,8 +112,6 @@ class UnknownLanguage extends Error {
         super(`Unknown language: ${currentLanguage}`);
     }
 }
-
-let currentLanguage = 'en_US';
 
 function setCurrentLanguage(newCurrentLanguage) {
     if (userMessages[newCurrentLanguage] === undefined) {
@@ -115,38 +132,26 @@ function tr(messageID) {
 
 }
 
-const trDoc = (function() {
-    const trDocRe = '' /* ... */;
-    return function trDoc(ancestorNode) {
-        let currentLanguage = 'en_US';
-        ancestorNode.querySelectorAll('[key="tr"]').forEach(function(node) {
-            let translate = userMessages[currentLanguage][node.innerHTML];
-            node.innerHTML = translate;
-        });
-    };
-})();
+document.addEventListener("DOMContentLoaded", () => {
+    
+  });
+  // add event listener for the english language button
+document.getElementById("engBtn").addEventListener("click", () => {
+    setCurrentLanguage("en");
+     document.querySelectorAll("[data-key]").forEach(translateElement);
+});
 
-// check which language the html document is in
-// and set the current language accordingly
-const html = document.querySelector('html');
-if (html.lang === 'pt') {
-    setCurrentLanguage('pt_PT');
-    for (const key in userMessages.pt_PT) {
-        let test = document.querySelectorAll('[key="tr"]');
-        userMessages.pt_PT[key] = userMessages.pt_PT[key].replace(test);
+// add event listener for the portuguese language button
+document.getElementById("ptBtn").addEventListener("click", () => {
+    setCurrentLanguage("pt");
+    document.querySelectorAll("[data-key]").forEach(translateElement);
+});
 
-    }
-}else {
-    setCurrentLanguage('en_US');
-    for (const key in userMessages.en_US) {
-        let test = document.querySelectorAll('[key="tr"]');
-        userMessages.en_US[key] = userMessages.en_US[key].replace(test);
-    }
-}
-
-
-
-document.onload = function() {
-    trDoc(document);
-};
-
+// Replace the inner text of the given HTML element
+// with the translation in the current language,
+// corresponding to the element's data-key
+function translateElement(element) {
+    const key = element.getAttribute("data-key");
+    const translation = userMessages[currentLanguage][key];
+    element.innerText = translation;
+  }

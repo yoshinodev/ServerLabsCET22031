@@ -5,9 +5,9 @@
 
 3 - Adicionar selecção do torneio a partir de uma dropdown **Done
 
-4 - Queremos que o nosso formulário aceite pelo menos duas línguas (pt e en). 
+4 - Queremos que o nosso formulário aceite pelo menos duas línguas (pt e en). **DONE
     Ver ficheiro locale.js. Neste ficheiro está um esboço para um suporte 
     de várias linguas client-side. Acabar este suporte e acrescentar 
     dois botões para alternar entre as duas linguas.
 
-(Opcional: 5 - Implementar formulário para criar torneio.)
+(Opcional: 5 - Implementar formulário para criar torneio.) **HTML E CSS DONE
